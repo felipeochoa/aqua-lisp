@@ -159,6 +159,9 @@ code {
   background-color: #f9f9f9;
   border-radius: 3px;
 }
+a code {
+  color: inherit;
+}
 pre {
   display: block;
   margin-top: 0;
