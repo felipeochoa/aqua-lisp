@@ -36,5 +36,7 @@ def translate_literal(literal):
         return "t" if literal else "nil"
     elif isinstance(literal, list):
         return "(%s)" % " ".join(map(translate, literal))
-    else:  # Should be a number
+    elif isinstance(literal, complex):
+        return "#C(%s %s)" % (literal.real, literal.imag)
+    else:  # Should be an integer or float
         return str(literal)
