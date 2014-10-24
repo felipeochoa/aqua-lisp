@@ -19,7 +19,7 @@ abstract grammar and a description of what they're for.
 
 Another way of obtaining a list of all the node types is as follows:
 
-```py3
+~~~ python
 >>> import ast
 >>> import inspect
 >>> for name, c in inspect.getmembers(ast, inspect.isclass):
@@ -31,7 +31,7 @@ Assert
 # <snip>
 unaryop
 withitem
-```
+~~~
 
 
 ## Dumping the AST to a Lisp string
@@ -48,26 +48,26 @@ sub-node-1 sub-node-2 ... sub-node-n)` and leaves that are either
 
 For example, we'll want to say
 
-```py3
+~~~ python
 translate(ast.parse("def f(arg1):\n  pass")))
-```
+~~~
 
 and have it return a string containing the following form:
 
-```lisp
+~~~ lisp
 (py-module
  ((py-functiondef "f"
                   (py-arguments ((py-arg "arg1" |None|)) |None| () () |None| ())
                   (py-pass)
                   ()
                   |None|)))
-```
+~~~
 
 (of course, we won't expect the translator to pretty print the form :)
 
 We can use a simple recursive function to handle most cases:
 
-```py3
+~~~ python
 def translate(node_or_literal):
     """Convert an AST node or Python literal into a Lisp form (recursively)."""
     if isinstance(node_or_literal, ast.AST):
@@ -78,7 +78,7 @@ def translate(node_or_literal):
                         for _, sub_nl in ast.iter_fields(node_or_literal))
         return "(%s %s)" % (symbol, args)
     return translate_literal(node_or_literal)
-```
+~~~
 
 We're punting on literal translation for a minute to momentarily savor
 this quick success.
@@ -109,7 +109,7 @@ literal-creating nodes like `Str` from our Pythonic DSL.
 
 Our translation code for literals can therefore be specified as:
 
-~~~ py3
+~~~ python
 def translate_literal(literal):
     "Translate a Python literal into a Lisp literal."
     if isinstance(literal, str):
@@ -125,7 +125,7 @@ def translate_literal(literal):
         return "#C(%s %s)" % (literal.real, literal.imag)
     else:  # Should be an integer or float
         return str(literal)
-```
+~~~
 
 
 ## Where to go from here?
