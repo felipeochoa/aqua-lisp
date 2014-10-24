@@ -32,7 +32,7 @@ robust (for example) PDF-parsing library.
 
 ## Why this structure?
 
-The way I see it, there are fundamentally three ways of briding the
+The way I see it, there are fundamentally three ways of bridging the
 Python-Lisp gap:
 
 ### 1. Embed Common Lisp in Python
