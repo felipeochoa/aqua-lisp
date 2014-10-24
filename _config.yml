@@ -1,5 +1,5 @@
 # Dependencies
-markdown:         redcarpet
+markdown:         kramdown
 highlighter:      pygments
 
 # Permalinks
@@ -11,7 +11,7 @@ title:            Python is not Lisp
 tagline:          'A Python to Common Lisp translator'
 description:      'A blog and project dedicated to bringing Python batteries to Common Lisp.'
 url:              https://github.com/felipeochoa/py-lisp/
-baseurl:          /py-lisp/
+baseurl:          /py-lisp
 
 author:
   name:           'Felipe Ochoa'
