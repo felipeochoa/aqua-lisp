@@ -93,7 +93,7 @@ several Python C-extensions, I still find its C API a bit daunting.
    generate ASTs.) I expect to create a Python script to perform this
    rough translation first.
 2. The first real order of business will be to implement all the AST
-   nodes as Lisp in a require-able runtime. Many of the nodes will be
+   nodes as Lisp in a `require`-able runtime. Many of the nodes will be
    straightforward to write as macros, but I expect that `ClassDef`
    will require some careful work with MOP and
    `Assign`/`Delete`/`Name` will require some overhead to track
