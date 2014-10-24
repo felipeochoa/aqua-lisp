@@ -3,28 +3,37 @@ layout: page
 title: About
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+## The code
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+This project came about as I started working on a different project
+which I prototyped in Python but ultimately wanted to develop in
+Lisp. In the prototype, I used several Python libraries for which I
+either couldn't find a Lisp replacement, or the Lisp replacement was
+terribly unmaintained.
 
-There are currently two themes built on Poole:
+After seeing all the complaints about Lisp's
+["library problem"](http://ilc2009.scheming.org/node/8), I decided
+that this was a deeper problem that I should work on.
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
+## The author
 
-Learn more and contribute on [GitHub](https://github.com/poole).
+I have been a Python coder since 2007, and have been hacking on
+(Emacs) Lisp since shortly afterwards. Most of the projects I've
+worked have been simply hobbies, so I have tended to favor Python's
+libraries/readabity over Lisp's power. I am much more intimately
+familiar with Python than Lisp, which hopefully puts me in a good
+position to develop `py-lisp`.
 
-## Setup
+## The blog
 
-Some fun facts about the setup of this project include:
+This website is hosted as a separate branch (`gh-pages`) of the GitHub
+repo, making it available on `github.io` (where you are likely reading
+it now).
 
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
+The site itself is built using Jekyll on GitHub servers, which is an
+awesome workflow. I write in Markdown and have "one-click" publishing
+by pushing the files to the repo.
 
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
-Thanks for reading!
+The awesome style of the site is provided by
+[Pool](https://github.com/poole). This is the
+[Hyde](http://hyde.getpoole.com) theme.
