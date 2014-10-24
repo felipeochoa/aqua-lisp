@@ -91,25 +91,25 @@ literals. Per the official docs, the Python abstract grammar has six
 builtin types which can end up becoming literals in the AST:
 
 | Grammar type | `AST` attribute      | Lisp type |
-|--------------+----------------------+-----------|
+|:-------------|:---------------------|:----------|
 | `identifier` | `str`                | `string`
-| `int`        | `int`                |
-| `string`     | `str`                |
-| `bytes`      | `bytes`              |
-| `object`     | Used for `ast.Num`, where it's used to store a number |
-| `singleton`  | Used for `ast.NameConstant`, holds `True`, `False`,  or `None` |
-| `*`          | There's an implied seventh type `list`, which is indicated in the grammar by the use of `*` |
+| `int`        | `int`                | `integer`
+| `string`     | `str`                | `string`
+| `bytes`      | `bytes`              | `simple-vector`
+| `object`     | Used for `ast.Num`, where it's used to store a number | `number`
+| `singleton`  | Used for `ast.NameConstant`, holds `True`, `False`,  or `None` | `t`, `nil`, or `|None|`
+| `*`          | There's an implied seventh type `list`, which is indicated in the grammar by the use of `*` | `list`
 
 Of all the attributes possible, only `None` is not built into Lisp as
-a literal (we can express `bytes` as a literal vector). We can leave
-it as a symbol for now and define it as an object later on. These
-choices for literals don't have to correspond to our run-time
-representations for objects. The real decision point will be when we
-implement the `Str` node from our Pythonic DSL.
+a literal; we can leave it as a symbol for now and define it as an
+object later on. It's worth noting that these choices for literals
+don't have to correspond to our run-time representations for
+objects. The real decision point will be when we implement the
+literal-creating nodes like `Str` from our Pythonic DSL.
 
-Our translation code is therefore
+Our translation code for literals can therefore be specified as:
 
-```py3
+~~~ py3
 def translate_literal(literal):
     "Translate a Python literal into a Lisp literal."
     if isinstance(literal, str):
@@ -121,9 +121,9 @@ def translate_literal(literal):
         return "|None|"
     elif isinstance(literal, bool):
         return "t" if literal else "nil"
-    elif isinstance(literal, list):
-        return "(%s)" % " ".join(map(translate, literal))
-    else:  # Should be a number
+    elif isinstance(literal, complex):
+        return "#C(%s %s)" % (literal.real, literal.imag)
+    else:  # Should be an integer or float
         return str(literal)
 ```
 
