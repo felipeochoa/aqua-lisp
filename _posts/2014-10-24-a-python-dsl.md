@@ -97,9 +97,9 @@ becoming literals in the AST:
 
 | Grammar type | `AST` attribute      | Lisp type |
 |:-------------|:---------------------|:----------|
-| `identifier` | `str`                | `string`
+| `identifier` | `str`                | `simple-vector`
 | `int`        | `int`                | `integer`
-| `string`     | `str`                | `string`
+| `string`     | `str`                | `simple-vector`
 | `bytes`      | `bytes`              | `simple-vector`
 | `object`     | Used for `ast.Num`, where it's used to store a number | `number`
 | `singleton`  | Used for `ast.NameConstant`, holds `True`, `False`,  or `None` | `t`, `nil`, or `|None|`
@@ -107,7 +107,14 @@ becoming literals in the AST:
 
 Of all the attributes possible, only `None` is not built into Lisp as
 a literal; we can leave it as a symbol for now and define it as an
-object later on. It's worth noting that these choices for literals
+object later on. Although Lisp has a `string` type, unicode support
+across implementations is not great (and not guaranteed by the
+standard), so we'll represent the `identifier` and `string` literals
+with a UTF-8 encoded byte vector. The structure of the grammar
+fortunately lets us disambiguate between `identifier` literals,
+`string` literals, and `bytes` literals.
+
+It's worth noting that these choices for literals
 don't have to correspond to our run-time representations for
 objects. The real decision point will be when we implement the
 literal-creating nodes like `Str` from our Pythonic DSL.
@@ -118,7 +125,7 @@ Our translation code for literals can therefore be specified as:
 def translate_literal(literal):
     "Translate a Python literal into a Lisp literal."
     if isinstance(literal, str):
-        return '"%s"' % literal
+        return translate_literal(literal.encode("utf-8"))
     elif isinstance(literal, bytes):
         return "#(%s)" % " ".join(int.from_bytes(b, "big")
                                        for b in literal)
