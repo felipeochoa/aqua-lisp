@@ -16,7 +16,7 @@ def translate(node_or_literal):
     if isinstance(node_or_literal, ast.AST):
         symbol = "|py-%s|" % node_or_literal.__class__.__name__
         if not node_or_literal._fields:  # this is a leaf node
-            return symbol
+            return "(%s)" % symbol
         args = " ".join(translate(sub_nl)
                         for _, sub_nl in ast.iter_fields(node_or_literal))
         return "(%s %s)" % (symbol, args)
