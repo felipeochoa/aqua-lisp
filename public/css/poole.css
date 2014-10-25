@@ -336,6 +336,15 @@ tbody tr:nth-child(odd) th {
   margin-bottom: 4em;
 }
 
+/* When showing a list of posts, insert a divider between the two */
+.posts .post {
+  margin-bottom: 0;
+  padding-bottom: 2em;
+  padding-top: 2em;
+  border-top: 1px solid #EEEEEE;
+  border-bottom: 1px solid #CCCCCC;
+}
+
 /* Blog post or page title */
 .page-title,
 .post-title,
