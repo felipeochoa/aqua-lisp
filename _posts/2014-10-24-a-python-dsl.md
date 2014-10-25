@@ -57,7 +57,12 @@ and have it return a string containing the following form:
 ~~~ lisp
 (py-module
  ((py-functiondef "f"
-                  (py-arguments ((py-arg "arg1" |None|)) |None| () () |None| ())
+                  (py-arguments ((py-arg "arg1" |None|))
+                                |None|
+                                ()
+                                ()
+                                |None|
+                                ())
                   (py-pass)
                   ()
                   |None|)))
