@@ -41,31 +41,31 @@ how to represent every node, we'll dump the AST tree into generic
 s-expression with minimal Python-side processing.
 
 The first thing we'll want to define is a target format. Since we want
-to do minimal Python processing, we'll use generic trees with branches
-(e.g., `BinOp` or `withitem`) following the pattern `(node-name
-sub-node-1 sub-node-2 ... sub-node-n)` and leaves that are either
-`node-name` (e.g., `Ellipsis`) or `literal-value` (e.g., `3`).
+to do minimal Python processing, we'll use simple cons trees: Nodes
+will follow the pattern `(node-name sub-node-1 sub-node-2
+... sub-node-n)` and their literal attributes will be represented by
+Lisp literal values.
 
 For example, we'll want to say
 
 ~~~ python
-translate(ast.parse("def f(arg1):\n  pass")))
+translate(ast.parse("def f(arg1):\n  pass"))
 ~~~
 
 and have it return a string containing the following form:
 
 ~~~ lisp
-(py-module
- ((py-functiondef "f"
-                  (py-arguments ((py-arg "arg1" |None|))
-                                |None|
-                                ()
-                                ()
-                                |None|
-                                ())
-                  (py-pass)
-                  ()
-                  |None|)))
+(|py-Module|
+ ((|py-FunctionDef| "f"
+                    (|py-arguments| ((|py-arg| "arg1" |None|))
+                                    |None|
+                                    ()
+                                    ()
+                                    |None|
+                                    ())
+                    ((|py-Pass|))
+                    ()
+                    |None|)))
 ~~~
 
 (of course, we won't expect the translator to pretty print the form :)
@@ -78,7 +78,7 @@ def translate(node_or_literal):
     if isinstance(node_or_literal, ast.AST):
         symbol = "|py-%s|" % node_or_literal.__class__.__name__
         if not node_or_literal._fields:  # this is a leaf node
-            return symbol
+            return "(%s)" % symbol
         args = " ".join(translate(sub_nl)
                         for _, sub_nl in ast.iter_fields(node_or_literal))
         return "(%s %s)" % (symbol, args)
@@ -90,10 +90,10 @@ this quick success.
 
 ## Translating AST literals into Lisp
 
-So far we've handled two of the three cases we'd described: branch
-nodes and leaf nodes. Now we are going to translate Python
-literals. Per the official docs, the Python abstract grammar has six
-builtin types which can end up becoming literals in the AST:
+So far we've handled half of the translation we'd described; now we
+are going to translate Python literals. Per the official docs, the
+Python abstract grammar has six builtin types which can end up
+becoming literals in the AST:
 
 | Grammar type | `AST` attribute      | Lisp type |
 |:-------------|:---------------------|:----------|
@@ -138,7 +138,7 @@ def translate_literal(literal):
 Our implementation of the translation code has determined a first
 version of our DSL. From here, we'll begin implementing macros and
 functions so our translated code can run! I expect there will be some
-node types we'll go back and special-case in Python where different
-forms may be easier to work with in Lisp. Of course, we'll have to
-design our (first version of the) data model to fully implement many
-of the nodes here.
+node types we'll go back and special-case in Python, where different
+forms may be easier to work with in Lisp. Of course, we'll also have
+to design our (first version of the) data model to fully implement
+many of the nodes here.
