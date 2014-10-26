@@ -26,7 +26,7 @@ def translate(node_or_literal):
 def translate_literal(literal):
     "Translate a Python literal into a Lisp literal."
     if isinstance(literal, str):
-        return translate_literal(literal.encode("utf-8"))
+        return translate_literal(literal.encode("utf-32-be"))
     elif isinstance(literal, bytes):
         return "#(%s)" % " ".join(int.from_bytes(b, "big")
                                        for b in literal)
