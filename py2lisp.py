@@ -28,8 +28,7 @@ def translate_literal(literal):
     if isinstance(literal, str):
         return translate_literal(literal.encode("utf-32-be"))
     elif isinstance(literal, bytes):
-        return "#(%s)" % " ".join(int.from_bytes(b, "big")
-                                       for b in literal)
+        return "#(%s)" % " ".join(map(str, literal))
     elif literal is None:
         return "|None|"
     elif isinstance(literal, bool):
