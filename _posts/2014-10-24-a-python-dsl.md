@@ -105,19 +105,31 @@ becoming literals in the AST:
 | `singleton`  | Used for `ast.NameConstant`, holds `True`, `False`,  or `None` | `t`, `nil`, or `|None|`
 | `*`          | There's an implied seventh type `list`, which is indicated in the grammar by the use of `*` | `list`
 
+
 Of all the attributes possible, only `None` is not built into Lisp as
 a literal; we can leave it as a symbol for now and define it as an
-object later on. Although Lisp has a `string` type, unicode support
-across implementations is not great (and not guaranteed by the
-standard), so we'll represent the `identifier` and `string` literals
-with a UTF-8 encoded byte vector. The structure of the grammar
-fortunately lets us disambiguate between `identifier` literals,
-`string` literals, and `bytes` literals.
+object later on. We can represent `bytes` as literal vectors of
+`fixnum`s using the `#()` notation.
 
-It's worth noting that these choices for literals
-don't have to correspond to our run-time representations for
-objects. The real decision point will be when we implement the
-literal-creating nodes like `Str` from our Pythonic DSL.
+It's worth noting that these choices for literals don't have to
+correspond to our run-time (or even compiled) representations for
+objects. We can make forms like `|Bytes|` or `|Str|` generate a better
+represenation in Lisp, and keep our Python code simple for now.
+
+### Unicode and Python strings
+
+It may seem strange to not use Lisp `string`s to represent Python
+`str` objects. Although Lisp has a `string` type, unicode support
+across implementations is not great (and not guaranteed by the
+standard), so we need a simple, portable represenation for the
+translated source.
+
+One such representation for `identifier` and `string` literals is to
+encode them as big-endian `UTF-32` and then represent them like we
+represent `bytes`. Because the grammar doesn't contain any places that
+accept more than one of `string`, `identifier`, or `bytes`, we'll be
+able to convert the `#()` vector into its run-time represenation once
+we decide what that is and how to implement our DSL.
 
 Our translation code for literals can therefore be specified as:
 
@@ -125,10 +137,9 @@ Our translation code for literals can therefore be specified as:
 def translate_literal(literal):
     "Translate a Python literal into a Lisp literal."
     if isinstance(literal, str):
-        return translate_literal(literal.encode("utf-8"))
+        return translate_literal(literal.encode("utf-32-be"))
     elif isinstance(literal, bytes):
-        return "#(%s)" % " ".join(int.from_bytes(b, "big")
-                                       for b in literal)
+        return "#(%s)" % " ".join(map(str, literal))
     elif literal is None:
         return "|None|"
     elif isinstance(literal, bool):
