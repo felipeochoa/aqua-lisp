@@ -167,6 +167,8 @@ def translate_literal(literal):
         return "|None|"
     elif isinstance(literal, bool):
         return "t" if literal else "nil"
+    elif isinstance(literal, list):
+        return "(%s)" % " ".join(map(translate, literal))
     elif isinstance(literal, complex):
         return "#C(%r %r)" % (literal.real, literal.imag)
     else:  # Should be an integer or float
