@@ -131,6 +131,29 @@ accept more than one of `string`, `identifier`, or `bytes`, we'll be
 able to convert the `#()` vector into its run-time represenation once
 we decide what that is and how to implement our DSL.
 
+### Representing floats properly
+
+[The Python data model](https://docs.python.org/3/reference/datamodel.html#the-standard-type-hierarchy)
+explicitly states that `numbers.Real` leave you "at the mercy of the
+underlying machine architecture for the accepted range and handling of
+overflow." The `float` class (which is a different class altogether),
+[states](https://docs.python.org/3.4/library/stdtypes.html#typesnumeric)
+that they "are usually implemented using `double` in C."
+
+Unfortunately,
+[the Common Lisp spec](http://www.lispworks.com/documentation/HyperSpec/Body/t_short_.htm#double-float)
+does not specify standard float sizes (though it does state
+minimums), so we are not necessarily able to represent the same set of
+floats in Python and Lisp. The best we can do is output float literals
+using `repr`, which ensures that `float(repr(x)) == x` for all floats
+`x` other than `inf`, `-inf`, and `NaN`.
+
+Another issue we'll have to deal with later is representing the `IEEE
+754` special values `inf`, `-inf`, `NaN`, which Common Lisp does not
+require, and properly handling overflow calculations. Since Python
+[doesn't have `inf` and `nan` literals](http://legacy.python.org/dev/peps/pep-0754/),
+we don't have to worry about these problems (yet).
+
 Our translation code for literals can therefore be specified as:
 
 ~~~ python
@@ -145,9 +168,9 @@ def translate_literal(literal):
     elif isinstance(literal, bool):
         return "t" if literal else "nil"
     elif isinstance(literal, complex):
-        return "#C(%s %s)" % (literal.real, literal.imag)
+        return "#C(%r %r)" % (literal.real, literal.imag)
     else:  # Should be an integer or float
-        return str(literal)
+        return repr(literal)
 ~~~
 
 
