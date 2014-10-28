@@ -7,9 +7,9 @@ permalink:        pretty
 relative_permalinks: true
 
 # Setup
-title:            Python is not Lisp
+title:            Python in Lisp
 tagline:          'A Python to Common Lisp translator'
-description:      'A blog and project dedicated to bringing Python batteries to Common Lisp.'
+description:      'A project and blog dedicated to bringing Python libraries to Common Lisp.'
 url:              https://github.com/felipeochoa/py-lisp/
 baseurl:          /py-lisp
 
