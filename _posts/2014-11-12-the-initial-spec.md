@@ -115,13 +115,13 @@ func(args[0], args[1], ... args[n],
 
 In other words, positional arguments are passed as a (Lisp) list in
 `args` and keyword arguments are in `kwargs` (as an alist), while
-`starargs` and `kwargs` handle the `*` and `**` arguemnts.
+`starargs` and `starkwargs` handle the `*` and `**` arguemnts.
 
 ## Exceptions
 
 For the core language features, we'll only need to be able to raise
-built-in exceptions. For now we'll only define a simple function for
-doing so easily:
+built-in exceptions. For now we'll only define a function for doing so
+easily:
 
 ~~~ lisp
 (defun raise-builtin (class-name &key args kwargs))
@@ -129,15 +129,16 @@ doing so easily:
 
 `raise-builtin` accepts a class name, given as a (case-sensitive)
 keyword (e.g., `:|TypeError|`), a (Lisp) list of positional arguments,
-and an alist of keyword arguments.
+and an alist of keyword arguments. The arguments are passed to the
+class constructor to create the instance that will be raised.
 
 ## New Python classes
 
 Creating new Python classes does not require any new code, since we
 can use the three argument form of `type` to create the class and
 `assign` to place it in the local namespace. It will be convenient,
-however, to provide a shortcut for this operation that takes Lisp
-objects for its arguments
+however, to provide a shortcut that takes Lisp objects for its
+arguments:
 
 ~~~ lisp
 (defmacro pyclass (name (&rest bases) &optional dict))
