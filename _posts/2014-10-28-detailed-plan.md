@@ -94,7 +94,7 @@ structure similar to
 Strings whose characters all fall within the implementation's
 definition of `character` are then represented with native strings,
 and all other strings are represented with vectors of type
-`(unsigned-byte x)` for `x` in `{1, 2, 4}`.
+`(unsigned-byte x)` for `x` in `{8, 16, 32}`.
 
 As for `memoryview`, the whole issue of the C API is something I want
 to punt on for now, but if the need arose I could see implementing
