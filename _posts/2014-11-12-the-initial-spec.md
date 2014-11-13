@@ -23,7 +23,7 @@ order we like.
 Attribute access will be provided through a single function:
 
 ~~~ lisp
-(defun getattr obj &rest attrs)
+(defun getattr (obj &rest attrs))
 ~~~
 
 We allow multiple attributes to be given in case of nested attribute
