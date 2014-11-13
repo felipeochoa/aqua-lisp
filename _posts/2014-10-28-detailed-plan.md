@@ -60,7 +60,7 @@ Python. I.e., translating a Python `class` statement into a Lisp
 ## Built-in types
 
 Many of the built-in types that get used a lot in Python code will be
-implemented with the Lisp built-in types, and thus will no not inherit
+implemented with the Lisp built-in types, and thus will not inherit
 from `py-object`.  We'll therefore have to special-case some of the
 syntax-related functions (like `getattr`) to deal with these objects,
 but it will make it easier for Lisp code to call Python code. I think
