@@ -72,7 +72,7 @@ translation code.
 Python numbers have easy analogues in Lisp types:
 
 | Python type | Lisp type      |
-+-------------+----------------+
+|-------------+----------------|
 | `int`       | `integer`      |
 | `float`     | `double-float` |
 | `complex`   | `complex`      |
