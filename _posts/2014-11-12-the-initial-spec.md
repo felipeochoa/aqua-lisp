@@ -62,7 +62,7 @@ primary means of creating Python functions will be using
 `pylambda`:
 
 ~~~ lisp
-(defmacro pylambda ((&optional (&rest args) starargs (&rest kwargs) starkwargs)
+(defmacro pylambda ((&optional args starargs kwargs starkwargs)
                     &body body))
 ~~~
 
@@ -108,14 +108,14 @@ our Python callable objects:
 
 ~~~ python
 func(args[0], args[1], ... args[n],
-     *args,
+     *starargs,
      kw.keys[0]=kw.vals[0], kw.keys[1]=kw.vals[1], ... kw.keys[m]=kw.vals[m],
-     **kwargs)
+     **starkwargs)
 ~~~
 
 In other words, positional arguments are passed as a (Lisp) list in
 `args` and keyword arguments are in `kwargs` (as an alist), while
-`starargs` and `starkwargs` handle the `*` and `**` arguemnts.
+`starargs` and `starkwargs` handle the `*` and `**` arguments.
 
 ## Exceptions
 
