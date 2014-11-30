@@ -20,9 +20,12 @@ that this was a deeper problem that I should work on.
 I have been a Python coder since 2007, and have been hacking on
 (Emacs) Lisp since shortly afterwards. Most of the projects I've
 worked have been simply hobbies, so I have tended to favor Python's
-libraries/readabity over Lisp's power. I am much more intimately
-familiar with Python than Lisp, which hopefully puts me in a good
-position to develop `py-lisp`.
+libraries/readability over Lisp's power. This project has made me
+engage with Python at a really deep level, and has pushed me to write
+some serious Lisp code.
+
+[My LinkedIn profile](https://www.linkedin.com/in/felipeochoa) is my
+public profile on the web.
 
 ## The blog
 
