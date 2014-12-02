@@ -121,7 +121,7 @@ In other words, positional arguments are passed as a (Lisp) list in
 
 For the core language features, we'll only need to be able to raise
 built-in exceptions. For now we'll only define a function for doing so
-easily:
+easily, leaving the more general `raise` statement for later.
 
 ~~~ lisp
 (defun raise-builtin (class-name &key args kwargs))
@@ -131,6 +131,23 @@ easily:
 keyword (e.g., `:|TypeError|`), a (Lisp) list of positional arguments,
 and an alist of keyword arguments. The arguments are passed to the
 class constructor to create the instance that will be raised.
+
+In order to handle exceptions, we'll draw a similar distinction
+between builtin and user exceptions. The following macro lets us
+handle builtin exceptions:
+
+~~~ lisp
+(defmacro py-builtin-try (try-body &rest except-finally-clauses))
+~~~
+
+`except-finally-clauses` must have the form `(exception (&optional
+var) body)`, where `exception` is a keyword that could be given to
+`raise-builtin`, or `t` to indicate a finally clause. `var` is the
+symbol that will be bound to the exception instance in the execution
+of `body`. There can only be zero or one finally clauses, and if there
+is one, it must be the last clause in the macro call. Inside an
+exception handler body, `(raise)` may be used to re-raise the
+exception in the same context.
 
 ## New Python classes
 
