@@ -12,7 +12,7 @@ either couldn't find a Lisp replacement, or the Lisp replacement was
 terribly unmaintained.
 
 After seeing all the complaints about Lisp's
-["library problem"](http://ilc2009.scheming.org/node/8), I decided
+"[library problem](http://ilc2009.scheming.org/node/8)", I decided
 that this was a deeper problem that I should work on.
 
 ## The author
