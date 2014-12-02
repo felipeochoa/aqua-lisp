@@ -178,6 +178,14 @@ the value or exception, if any.
 
 ## 5. Release of resources
 
+> **Edit**: The original version of this post glossed over the  `next`,
+> `send`, and `throw` implementations. I will expand this section over
+> the next couple of days to address this non-trivial point.
+
+Unlike `for` and `while`, `try...finally` (and its sibling, `with`),
+cannot be emptied out into an enclosing `tagbody`, since in Lisp they
+ultimately need to be wrapped in an `unwind-protect`.
+
 The Python documentation specifies that the `__del__` method of the
 generator calls its `close` method, ensuring that any `finally`
 clauses and `with` blocks get resolved properly. Implementing the
