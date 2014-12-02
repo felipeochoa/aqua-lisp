@@ -178,8 +178,8 @@ the value or exception, if any.
 
 ## 5. Release of resources
 
-> **Edit**: The original version of this post glossed over the  `next`,
-> `send`, and `throw` implementations. I will expand this section over
+> **Edit**: The original version of this post glossed over the  `try`,
+> `finally`, and `with` implementations. I will expand this section over
 > the next couple of days to address this non-trivial point.
 
 Unlike `for` and `while`, `try...finally` (and its sibling, `with`),
