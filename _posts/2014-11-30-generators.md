@@ -194,6 +194,13 @@ difficulty lies in ensuring the `__del__` method gets called. This
 difficulty extends beyond just generators to any object that defines
 custom finalization code and will be addressed separately.
 
+## Implementation
+
+I am still working on the translation tool to make all these changes
+automatically. One key problem is expanding a single form (with the
+AST for a loop) into multiple forms right in the tagbody. I'll post
+the code and a discussion of some of these issues when they're resolved.
+
 ## Footnotes
 
 [^TCO]:
