@@ -9,7 +9,7 @@ relative_permalinks: true
 # Setup
 title:            Python in Lisp
 tagline:          'A Python to Common Lisp translator'
-description:      'A project and blog dedicated to bringing Python libraries to Common Lisp.'
+description:      'A project dedicated to bringing Python libraries to Common Lisp.'
 url:              https://github.com/felipeochoa/py-lisp/
 baseurl:          /py-lisp
 
