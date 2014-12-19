@@ -7,7 +7,7 @@ permalink:        pretty
 relative_permalinks: true
 
 # Setup
-title:            Aqua-Lisp: Python in Lisp
+title:            'Aqua-Lisp: Python in Lisp'
 tagline:          'A Python to Common Lisp translator'
 description:      'A project dedicated to bringing Python libraries to Common Lisp.'
 url:              https://github.com/felipeochoa/aqua-lisp/
