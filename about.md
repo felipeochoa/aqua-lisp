@@ -40,3 +40,13 @@ by pushing the files to the repo.
 The awesome style of the site is provided by
 [Pool](https://github.com/poole). This is the
 [Hyde](http://hyde.getpoole.com) theme.
+
+## The name
+
+The name is a reference to
+[Dennis the Constitutional Peasant](http://www.imdb.com/character/ch0091184/quotes),
+from *Monty Python and the Holy Grail*, who says to Arthur, "Supreme
+executive power derives from a mandate from the masses, not from some
+farcical aquatic ceremony... you can't expect to wield supreme
+executive power just because some watery tart threw a sword at you."
+That and `cl-python` and `pylisp` were already taken.

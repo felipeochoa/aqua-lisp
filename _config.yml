@@ -7,11 +7,11 @@ permalink:        pretty
 relative_permalinks: true
 
 # Setup
-title:            Python in Lisp
+title:            Aqua-Lisp: Python in Lisp
 tagline:          'A Python to Common Lisp translator'
 description:      'A project dedicated to bringing Python libraries to Common Lisp.'
-url:              https://github.com/felipeochoa/py-lisp/
-baseurl:          /py-lisp
+url:              https://github.com/felipeochoa/aqua-lisp/
+baseurl:          /aqua-lisp
 
 author:
   name:           'Felipe Ochoa'
@@ -23,4 +23,4 @@ paginate:         5
 version:          master
 
 github:
-  repo:           https://github.com/felipeochoa/py-lisp
+  repo:           https://github.com/felipeochoa/aqua-lisp
